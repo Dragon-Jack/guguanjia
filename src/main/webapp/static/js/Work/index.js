@@ -55,21 +55,21 @@ let vm = new Vue({
                 })
         },
         Order:function(id){
-            console.log(id)
+            // console.log(id)
             axios({
                 url: 'manager/company/work/order',
                 params: {id:id}
             })
                 .then(response => {
                     layer.appVersion = response.data;
-                    console.log(response.data);
+                    // console.log(response.data);
                     layer.open({
                         type: 2,
                         title: "资质审核",
                         content: "html/work/work-detail.html",
                         area: ["80%", "80%"],
                         end: () => {
-                            this.qua(this.pageInfo.pageNum, this.pageInfo.pageSize);
+                            // this.selectAll(this.pageInfo.pageNum, this.pageInfo.pageSize);
                         }
                     })
 

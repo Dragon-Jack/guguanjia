@@ -2,6 +2,8 @@ package com.dfbz.controller;
 
 
 import com.dfbz.dao.WorkMapper;
+import com.dfbz.entity.Detail;
+import com.dfbz.entity.Transfer;
 import com.dfbz.entity.Work;
 import com.dfbz.service.WorkSrevice;
 import com.github.pagehelper.PageInfo;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import sun.rmi.transport.Transport;
 
 import java.util.HashMap;
 import java.util.List;
@@ -30,22 +33,9 @@ public class WorkConteroller {
     @RequestMapping("sponsor")
     @ResponseBody
     public PageInfo<Work> selectSponsor(@RequestBody Map<String,Object> map){
-        List<Work> disposer = mapper.Disposer();
-        List<Work> transporter = mapper.Transporter();
-        PageInfo<Work> workPageInfo = srevice.selectSponsor(map);
 
 
-        for (Work work : workPageInfo.getList()) {
-
-            for (Work work1 : disposer) {
-               work.setDisposer(work1.getDisposer());
-            }
-            for (Work work2 : transporter) {
-               work.setTransporter(work2.getTransporter());
-            }
-        }
-
-        return workPageInfo;
+        return srevice.selectSponsor(map);
     }
 
 
@@ -59,17 +49,23 @@ public class WorkConteroller {
 
     @RequestMapping("order")
     @ResponseBody
-    public List<Work> order(@RequestParam long id){
+    public Work order(@RequestParam long id){
 
-        List<Work> order = mapper.order(id);
-        System.out.println(order+"-----");
-        return mapper.order(id);
+        return srevice.order(id);
     }
 
     @RequestMapping("waste")
     @ResponseBody
-    public List<Work> waste(long id){
+    public Detail waste(long id){
 
-        return mapper.waste(id);
+        return srevice.waste(id);
+    }
+
+
+    @RequestMapping("transport")
+    @ResponseBody
+    public Transfer transport(long id){
+
+        return srevice.transport(id);
     }
 }

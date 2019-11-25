@@ -67,21 +67,68 @@ public class Work {
 
 
     @Transient
-    private String name;
+    private String name;    //offname
     @Transient
-    private String username;
+    private String crname;//username
     @Transient
-    private String Disposer;
+    private String crphone;
     @Transient
-    private String Transporter;
+    private String trname;//Disposer
+    @Transient
+    private String trphone;
+    @Transient
+    private String recname;//Transporter
+    @Transient
+    private String recphone;
 
 
-    public String getUsername() {
-        return username;
+
+    public String getCrname() {
+        return crname;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setCrname(String crname) {
+        this.crname = crname;
+    }
+
+    public String getCrphone() {
+        return crphone;
+    }
+
+    public void setCrphone(String crphone) {
+        this.crphone = crphone;
+    }
+
+    public String getTrname() {
+        return trname;
+    }
+
+    public void setTrname(String trname) {
+        this.trname = trname;
+    }
+
+    public String getTrphone() {
+        return trphone;
+    }
+
+    public void setTrphone(String trphone) {
+        this.trphone = trphone;
+    }
+
+    public String getRecname() {
+        return recname;
+    }
+
+    public void setRecname(String recname) {
+        this.recname = recname;
+    }
+
+    public String getRecphone() {
+        return recphone;
+    }
+
+    public void setRecphone(String recphone) {
+        this.recphone = recphone;
     }
 
     public String getName() {
@@ -92,42 +139,7 @@ public class Work {
         this.name = name;
     }
 
-    public String getDisposer() {
-        return Disposer;
-    }
 
-    public void setDisposer(String disposer) {
-        Disposer = disposer;
-    }
-
-    public String getTransporter() {
-        return Transporter;
-    }
-
-    public void setTransporter(String transporter) {
-        Transporter = transporter;
-    }
-
-
-    @Override
-    public String toString() {
-        return "Work{" +
-                "id=" + id +
-                ", code='" + code + '\'' +
-                ", createUserId=" + createUserId +
-                ", transportUserId=" + transportUserId +
-                ", recipientUserId=" + recipientUserId +
-                ", status=" + status +
-                ", createDate=" + createDate +
-                ", updateDate=" + updateDate +
-                ", delFlag='" + delFlag + '\'' +
-                ", createBy='" + createBy + '\'' +
-                ", name='" + name + '\'' +
-                ", username='" + username + '\'' +
-                ", Disposer='" + Disposer + '\'' +
-                ", Transporter='" + Transporter + '\'' +
-                '}';
-    }
 
     /**
      * @return id
@@ -302,4 +314,26 @@ public class Work {
         this.createBy = createBy == null ? null : createBy.trim();
     }
 
+    @Override
+    public String toString() {
+        return "Work{" +
+                "id=" + id +
+                ", code='" + code + '\'' +
+                ", createUserId=" + createUserId +
+                ", transportUserId=" + transportUserId +
+                ", recipientUserId=" + recipientUserId +
+                ", status=" + status +
+                ", createDate=" + createDate +
+                ", updateDate=" + updateDate +
+                ", delFlag='" + delFlag + '\'' +
+                ", createBy='" + createBy + '\'' +
+                ", name='" + name + '\'' +
+                ", crname='" + crname + '\'' +
+                ", crphone='" + crphone + '\'' +
+                ", trname='" + trname + '\'' +
+                ", trphone='" + trphone + '\'' +
+                ", recname='" + recname + '\'' +
+                ", recphone='" + recphone + '\'' +
+                '}';
+    }
 }

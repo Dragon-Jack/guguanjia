@@ -1,6 +1,8 @@
 package com.dfbz.service.Impi;
 
 import com.dfbz.dao.WorkMapper;
+import com.dfbz.entity.Detail;
+import com.dfbz.entity.Transfer;
 import com.dfbz.entity.Work;
 import com.dfbz.service.WorkSrevice;
 import com.github.pagehelper.PageHelper;
@@ -27,12 +29,28 @@ public class WorkServiceImpi extends TserviceImpi<Work> implements WorkSrevice {
         if (StringUtils.isEmpty(map.get("pageSize"))){
             map.put("pageSize",5);
         }
-
-
         PageHelper.startPage((Integer) map.get("pageNum"), (Integer) map.get("pageSize"));
-        List<Work> works = workMapper.selectSponsor(map);
-        PageInfo<Work> objectPageInfo = new PageInfo<>(works);
 
-        return objectPageInfo;
+        List<Work> works = workMapper.selectSponsor(map);
+        PageInfo<Work> workPageInfo = new PageInfo<>(works);
+
+        return workPageInfo;
     }
+
+    @Override
+    public Work order(long id) {
+        return workMapper.order(id);
+    }
+
+    @Override
+    public Detail waste(long id) {
+        return workMapper.waste(id);
+    }
+
+    @Override
+    public Transfer transport(long id) {
+        return workMapper.transport(id);
+    }
+
+
 }

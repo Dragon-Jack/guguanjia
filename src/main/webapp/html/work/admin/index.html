@@ -195,9 +195,9 @@
                                     <a @click="Order(wor.id)">{{wor.code}}</a>
                                 </td>
                                 <td class="center">{{wor.name}}</td>
-                                <td class="center">{{wor.username}}</td>
-                                <td class="center">{{wor.transporter}}</td>
-                                <td class="center">{{wor.disposer}}</td>
+                                <td class="center">{{wor.crname}}</td>
+                                <td class="center">{{wor.trname}}</td>
+                                <td class="center">{{wor.recname}}</td>
                                 <td class="center">
                                     <font v-if="wor.status==0" color="red">{{wor.status==0?'待运输':wor.status==1?'运输中':'验收'}}</font>
                                     <font v-if="wor.status==1" color="green">{{wor.status==0?'待运输':wor.status==1?'运输中':'验收'}}</font>
