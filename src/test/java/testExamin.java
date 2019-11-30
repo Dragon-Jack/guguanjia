@@ -35,6 +35,7 @@ public class testExamin {
 
         HashMap<String, Object> map = new HashMap<>();
         PageInfo<Examine> selectexamin = es.selectexamin(map);
+
         System.out.println(selectexamin);
     }
 }

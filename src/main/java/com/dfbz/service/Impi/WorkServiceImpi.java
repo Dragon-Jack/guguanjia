@@ -4,7 +4,7 @@ import com.dfbz.dao.WorkMapper;
 import com.dfbz.entity.Detail;
 import com.dfbz.entity.Transfer;
 import com.dfbz.entity.Work;
-import com.dfbz.service.WorkSrevice;
+import com.dfbz.service.WorkService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Map;
 @Service
 @Transactional
-public class WorkServiceImpi extends TserviceImpi<Work> implements WorkSrevice {
+public class WorkServiceImpi extends TserviceImpi<Work> implements WorkService {
 
     @Autowired
     WorkMapper workMapper;
