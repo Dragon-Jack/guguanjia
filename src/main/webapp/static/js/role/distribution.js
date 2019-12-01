@@ -8,7 +8,10 @@ let vm = new Vue({
             },
             appVersion: {},
             //.....传回后台在建个对象
+            condition: {},
+            selected: {},
 
+            //-----------------------------------
             treenodes: {
                 higtLine: true
             },
@@ -28,52 +31,32 @@ let vm = new Vue({
 
             },
             nodes: [],
-            nodeAll:{},
-            name:""
+            nodeAll: {},
+            name: ""
         }
 
     },
     methods: {
         selectAll: function () {
-            // axios({
-            //     url: "",
-            //     method: "post",
-            //     data: ""
-            // }).then(resp => {
-            //
-            //     this.pageInfo = resp.data;
-            //     this.nodes = resp.data;
-            // })
+            axios({
+                url: 'manager/role/roledis',
+                params: {srname: this.appVersion.srname}
+            }).then(resp => {
+                this.selected = resp.data;
+
+            }).catch(function (e) {
+                console.log(e)
+            })
         },
         inittree: function () {
             this.nodeAll = $.fn.zTree.init($("#treeOffice"), this.setting, this.nodes);
 
-            console.log(this.nodes);
         },
         beforeClick: function (treeId, treeNode) {
             this.condition.name = treeNode.name
         },
         key: function () {
-            //查找匹配的节点                                        输入框的v-model
-            let nodes = this.nodeAll.getNodesByParamFuzzy("name", this.name, null);
-            //获取所有节点
-            let treeNodes = this.nodeAll.transformToArray(this.nodeAll.getNodes());
-            //请除高亮
-            for (let index in treeNodes) {
-                treeNodes[index].higtLine=false;
-                this.nodeAll.updateNode(treeNodes[index])
-            }
 
-            //设置高亮
-            for (let index in treeNodes) {
-                for (let nodeindex in nodes) {
-                    if (treeNodes[index].id == nodes[nodeindex].id) {
-                        treeNodes[index].higtLine=true;
-
-                        this.nodeAll.updateNode(treeNodes[index])
-                    }
-                }
-            }
         },
         setcss: function (treeId, treeNode) {
             return treeNode.higtLine ? {color: "red"} : {color: ""}
@@ -81,7 +64,7 @@ let vm = new Vue({
     },
     created: function () {
         this.appVersion = parent.layer.appVersion;
-        this.nodes =this.appVersion;
+        this.nodes = this.appVersion.aa;
         this.selectAll();
         this.inittree();
     }

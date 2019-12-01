@@ -5,7 +5,12 @@ let vm = new Vue({
             pageNum: 1,
             pageSize: 5
         },
-        params:{}
+        params:{
+        },
+        pp:{
+            srname:'',
+            aa:''
+        }
 
     },
     methods: {
@@ -17,18 +22,20 @@ let vm = new Vue({
                 params: this.params
             })
                 .then(response => {
-                    // console.log(response.data);
                     this.pageInfo = response.data;
                 })
                 .catch(function (error) {
                     console.log(error);
                 })
-        }, toselect: function () {
+        },
+        toselect: function (srname) {
+            this.pp.srname=srname;
             axios({
                 url: 'manager/role/toselect',
-            })
-                .then(response => {
-                    layer.appVersion = response.data;
+            }).then(response => {
+                    this.pp.aa=response.data;
+                    layer.appVersion = this.pp;
+
                     layer.open({
                         type: 2,
                         title: "更新数据",
@@ -37,8 +44,7 @@ let vm = new Vue({
                         end: function () {
                         }
                     })
-                })
-                .catch(function (error) {
+                }).catch(function (error) {
                     console.log(error);
                 })
         }
