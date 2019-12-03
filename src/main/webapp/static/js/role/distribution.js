@@ -43,11 +43,23 @@ let vm = new Vue({
                 params: {srname: this.appVersion.srname}
             }).then(resp => {
                 this.selected = resp.data;
+            }).catch(function (e) {
+                console.log(e)
+            })
+        },
+        toselected: function () {
+            axios({
+                url: 'manager/role/roledis',
+                params: {srname: this.appVersion.srname}
+            }).then(resp => {
+                this.selected = resp.data;
 
             }).catch(function (e) {
                 console.log(e)
             })
         },
+
+
         inittree: function () {
             this.nodeAll = $.fn.zTree.init($("#treeOffice"), this.setting, this.nodes);
 

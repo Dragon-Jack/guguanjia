@@ -91,12 +91,12 @@
 									</div>
 
 									<div class="widget-body">
-										<form action="role/saveuser" method="post" id="role-user-form">
+										<form method="post" id="role-user-form">
 											<div class="widget-main" id="yxuser">
 												<div class="checkbox">
 													<label v-for="s in selected">
-														<input class="ace ace-checkbox-2" type="checkbox" name="userIds" v-model="selected.name">
-														<span class="lbl"> {{s.name}}</span>
+														<input class="ace ace-checkbox-2" type="checkbox" name="userIds">
+														<span class="lbl">{{s.name}}</span>
 													</label>
 												</div>
 											</div>
@@ -104,7 +104,7 @@
 										<div id="removeUserBtn">
 											<a href="javascript:void(0);" class="btn btn-block btn-success">
 												<i class="ace-icon fa fa-trash bigger-110"></i>
-												<span>移除人员</span>
+												<span @click="del">移除人员</span>
 											</a>
 										</div>
 									</div>

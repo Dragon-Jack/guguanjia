@@ -6,7 +6,7 @@ let vm = new Vue({
                 pageNum: 1,
                 pageSize: 5
             },
-
+            condition:{},
             //.....传回后台在建个对象
 
             treenodes: {
@@ -16,6 +16,7 @@ let vm = new Vue({
             setting: {
                 data: {
                     simpleData: {
+                        pIdKey: "parentId",  //设置父id
                         enable: true         //设置极简模式
                     }
                 },
@@ -27,67 +28,63 @@ let vm = new Vue({
                 }
 
             },
-            nodes: [],
-            nodeAll:{},
-            name:""
+            nodes: [
+            ],
+            nodeAll: {},
+            name: ""
         }
 
     },
     methods: {
         // selectAll: function (pageNum, pageSize) {
-        //     // this.condition.pageNum = pageNum;
-        //     // this.condition.pageSize = pageSize;
+        //     this.condition.pageNum = pageNum;
+        //     this.condition.pageSize = pageSize;
         //     axios({
-        //         url: "",
+        //         url: "manager/examine/index/examinePageInfo",
         //         method: "post",
-        //         data: ""
+        //         data: this.condition
         //     }).then(resp => {
         //
         //         this.pageInfo = resp.data;
         //         this.nodes = resp.data;
         //     })
         // },
-        inittree: function () {
+        writeExcel:function(){
             axios({
-                url: "",
-
+                url: "manager/area/writeExcel",
             }).then(resp => {
 
+               console.log("成功");
+            })
+        },
+        readExcel:function(e){
+            let file=e.target.files[0];
+            let form = new FormData();//构建表单对象
+            form.append("file",file);//绑定file对象到key file上，该key必须与后台的接收参数名一致
+            axios({
+                url: 'manager/area/readExcel',
+                method: 'post',
+                header:{"content-type":'multipart/form-data'},
+                data: form
+            }).then(resp => {
+                this.inittree();
+                console.log("成功");
+            })
+        },
+
+        inittree: function () {
+            axios({
+                url: "manager/area/Region",
+
+            }).then(resp => {
                 this.nodes = resp.data;
                 //init($("#pullDownTreeone")        ul的id
-                this.nodeAll  = $.fn.zTree.init($("#treeMenu"), this.setting, this.nodes);
-
-
+                this.nodeAll = $.fn.zTree.init($("#treeMenu"), this.setting, this.nodes);
             })
 
         },
         beforeClick: function (treeId, treeNode) {
             this.condition.name = treeNode.name
-        },
-        key: function () {
-            //查找匹配的节点                                        输入框的v-model
-            let nodes = this.nodeAll.getNodesByParamFuzzy("name", this.name, null);
-            //获取所有节点
-            let treeNodes = this.nodeAll.transformToArray(this.nodeAll.getNodes());
-            //请除高亮
-            for (let index in treeNodes) {
-                treeNodes[index].higtLine=false;
-                this.nodeAll.updateNode(treeNodes[index])
-            }
-
-            //设置高亮
-            for (let index in treeNodes) {
-                for (let nodeindex in nodes) {
-                    if (treeNodes[index].id == nodes[nodeindex].id) {
-                        treeNodes[index].higtLine=true;
-
-                        this.nodeAll.updateNode(treeNodes[index])
-                    }
-                }
-            }
-        },
-        setcss: function (treeId, treeNode) {
-            return treeNode.higtLine ? {color: "red"} : {color: ""}
         }
     },
     created: function () {

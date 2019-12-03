@@ -127,7 +127,7 @@
                                 </div>
                                 <div class="widget-toolbar">
 			<span class="btn btn-purple btn-xs"
-                  onclick="Angel.downloadFile('search-form','area/export')">
+                  @click="writeExcel">
 			<i class="ace-icon fa fa-cloud-upload bigger-130"></i>
 			导出Excel</span>
                                 </div>
@@ -135,10 +135,7 @@
 			<span class="btn btn-purple btn-xs" id="importFile">
 				<i class="ace-icon fa fa-cloud-download bigger-130"></i>
 				<span>导入数据</span>
-				<input type="file" class="phide" name="excel"
-                       data-url="area/import" _accept="application/vnd.ms-excel"
-                       data-progressid="#excel-progress"
-                       onchange="Angel.uploadFile.excel(this);"/>
+				<input type="file" class="phide" name="excel" @change="readExcel"/>
 			</span>
                                 </div>
                                 <div class="widget-toolbar no-border">
@@ -513,6 +510,7 @@
 
 <script type="text/javascript" src="static/vue/vue.js"></script>
 <script type="text/javascript" src="static/vue/axios.js"></script>
+<script type="text/javascript" src="static/js/area/index.js"></script>
 
 
 </body>

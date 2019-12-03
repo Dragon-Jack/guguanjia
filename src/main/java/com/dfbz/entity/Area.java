@@ -1,5 +1,9 @@
 package com.dfbz.entity;
 
+import com.alibaba.excel.annotation.ExcelIgnore;
+import com.alibaba.excel.annotation.ExcelProperty;
+import com.alibaba.excel.annotation.format.DateTimeFormat;
+
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -44,12 +48,15 @@ public class Area {
      * 创建者
      */
     @Column(name = "create_by")
+    @ExcelIgnore    //忽略生成字段到excel
     private String createBy;
 
     /**
      * 创建时间
      */
     @Column(name = "create_date")
+    @ExcelProperty("创建时间")  //修改表头
+    @DateTimeFormat ("yyyy年MM月dd日") //修改日期格式
     private Date createDate;
 
     /**
@@ -76,6 +83,22 @@ public class Area {
     private String delFlag;
 
     private String icon;
+
+    public Area(Long id, Long parentId, String parentIds, String code, String name, String type, String createBy, Date createDate, String updateBy, Date updateDate, String remarks, String delFlag, String icon) {
+        this.id = id;
+        this.parentId = parentId;
+        this.parentIds = parentIds;
+        this.code = code;
+        this.name = name;
+        this.type = type;
+        this.createBy = createBy;
+        this.createDate = createDate;
+        this.updateBy = updateBy;
+        this.updateDate = updateDate;
+        this.remarks = remarks;
+        this.delFlag = delFlag;
+        this.icon = icon;
+    }
 
     /**
      * 获取编号
@@ -305,5 +328,8 @@ public class Area {
      */
     public void setIcon(String icon) {
         this.icon = icon == null ? null : icon.trim();
+    }
+
+    public Area() {
     }
 }
