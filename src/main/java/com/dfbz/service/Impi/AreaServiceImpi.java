@@ -27,7 +27,7 @@ public class AreaServiceImpi extends TserviceImpi<Area> implements AreaService {
     public void writeExcel(){       //写成Excel
         List<Area> areas = areaMapper.selectAll();
 
-        ExcelWriter build = EasyExcel.write("E:\\excel\\text.xlsx",Area.class).build();
+        ExcelWriter build = EasyExcel.write("D:\\excel\\text.xlsx",Area.class).build();
         WriteSheet build1 = EasyExcel.writerSheet("dragon").build();
 
         build.write(areas,build1);
